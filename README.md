@@ -3,6 +3,8 @@
 [Model Context Protocol](https://modelcontextprotocol.wiki) server for google search.
 A Playwright-based Model Context Protocol (MCP) tool that bypasses search engine anti-bot mechanisms, performs Google searches, and extracts results, providing real-time search capabilities for AI assistants like Claude and Cursor.
 
+[![smithery badge](https://smithery.ai/badge/@modelcontextprotocol-servers/google-search-mcp)](https://smithery.ai/server/@modelcontextprotocol-servers/google-search-mcp)
+
 ## Features
 
 - **Anti-Bot Bypass**: Uses browser fingerprint spoofing and real user behavior simulation to avoid detection
@@ -14,6 +16,16 @@ A Playwright-based Model Context Protocol (MCP) tool that bypasses search engine
 
 
 ## Using with Cursor
+
+### Installing via Smithery
+
+To install Google Search for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@modelcontextprotocol-servers/google-search-mcp):
+
+```bash
+npx -y @smithery/cli install @modelcontextprotocol-servers/google-search-mcp --client claude
+```
+
+### Installing Manually
 
 **Installation - Globally**
 
