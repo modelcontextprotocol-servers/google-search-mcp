@@ -3,6 +3,10 @@
 [Model Context Protocol](https://modelcontextprotocol.wiki) server for google search.
 A Playwright-based Model Context Protocol (MCP) tool that bypasses search engine anti-bot mechanisms, performs Google searches, and extracts results, providing real-time search capabilities for AI assistants like Claude and Cursor.
 
+<a href="https://glama.ai/mcp/servers/@modelcontextprotocol-servers/google-search-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@modelcontextprotocol-servers/google-search-mcp/badge" alt="Google Search MCP server" />
+</a>
+
 ## Features
 
 - **Anti-Bot Bypass**: Uses browser fingerprint spoofing and real user behavior simulation to avoid detection
