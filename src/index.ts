@@ -10,33 +10,33 @@ import { fileURLToPath } from "url"
 import { googleSearch } from "./search.js"
 import { CommandOptions } from "./types.js"
 
-// 获取当前文件的目录路径
+// Get the directory path of the current file
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// 配置
+// Configuration
 const STATE_FILE_PATH = path.join(os.homedir(), ".google-search-browser-state.json")
-const DEFAULT_TIMEOUT = 60000 // 60秒
-const DEFAULT_LIMIT = 10 // 默认返回10条结果
-const DEFAULT_LANGUAGE = "zh-CN" // 默认语言
-const DEFAULT_REGION = "cn" // 默认地区
+const DEFAULT_TIMEOUT = 60000 // 60 seconds
+const DEFAULT_LIMIT = 10 // Default returns 10 results
+const DEFAULT_LANGUAGE = "zh-CN" // Default language
+const DEFAULT_REGION = "cn" // Default region
 
-// 创建 MCP 服务器
+// Create MCP server instance
 const server = new McpServer({
   name: "Google Search MCP",
   version: "1.0.0",
-  description: "基于 Playwright 的 Google 搜索 MCP 服务器"
+  description: "Google Search MCP server based on Playwright",
 })
 
-// 添加 Google 搜索工具
+// Add Google Search tool
 server.tool(
   "search",
   { 
-    query: z.string().describe("搜索查询字符串"),
-    limit: z.number().optional().describe("返回的搜索结果数量，默认为10"),
-    timeout: z.number().optional().describe("搜索操作的超时时间(毫秒)，默认为60000"),
-    language: z.string().optional().describe("搜索结果的语言，例如 zh-CN, en-US 等，默认为 zh-CN"),
-    region: z.string().optional().describe("搜索结果的地区，例如 cn, com, co.jp 等，默认为 cn")
+    query: z.string().describe("Search query string"),
+    limit: z.number().optional().describe("Number of search results returned, default is 10"),
+    timeout: z.number().optional().describe("Timeout for search operation (milliseconds), default is 60000"),
+    language: z.string().optional().describe("Language of search results, e.g., zh-CN, en-US, default is zh-CN"),
+    region: z.string().optional().describe("Region of search results, e.g., cn, com, co.jp, default is  cn")
   },
   async ({ 
     query, 
@@ -52,7 +52,7 @@ server.tool(
     region?: string;
   }) => {
     try {
-      // 构建搜索选项
+      // Build search options
       const options: CommandOptions = {
         limit,
         timeout,
@@ -60,8 +60,8 @@ server.tool(
         locale: language,
         region
       }
-      
-      // 执行搜索
+
+      // Execute search
       const results = await googleSearch(query, options)
       
       return {
@@ -72,21 +72,21 @@ server.tool(
       }
     } catch (error: any) {
       return {
-        content: [{ type: "text", text: `执行 Google 搜索时出错: ${error.message}` }],
+        content: [{ type: "text", text: `Error occurred during Google search: ${error.message}` }],
         isError: true
       }
     }
   }
 )
 
-// 启动服务器
+// Start server
 async function main() {
   try {
     const transport = new StdioServerTransport()
     await server.connect(transport)
-    console.error("Google Search MCP 服务器已启动")
+    console.error("Google Search MCP server has started")
   } catch (error: any) {
-    console.error("启动 Google Search MCP 服务器时出错:", error)
+    console.error("Error occurred while starting Google Search MCP server:", error)
     process.exit(1)
   }
 }
